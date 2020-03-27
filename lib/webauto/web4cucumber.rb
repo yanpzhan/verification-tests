@@ -116,6 +116,10 @@ require_relative 'chrome_extension'
           caps[:element_scroll_behavior] = @scroll_strategy
         end
         options = Selenium::WebDriver::Firefox::Options.new profile: firefox_profile #, binary: "/home/user/local/firefox-52-esr/firefox"
+        if self.class.container?
+          options.add_argument('--disable-dev-shm-usage')
+        end
+
         # set any additional moz:firefoxOptions in the following way
         # options.add_option :log, {"level"=> "trace"}
 
@@ -126,6 +130,7 @@ require_relative 'chrome_extension'
         # this also needs debug webdriver logging enabled above to work
         # options.log_level = 'trace'
 
+        raise "Printing options: #{@options}"
         @browser = Watir::Browser.new :firefox, :http_client=>client, desired_capabilities: caps, options: options
         if @size
           browser.window.resize_to(*@size)
