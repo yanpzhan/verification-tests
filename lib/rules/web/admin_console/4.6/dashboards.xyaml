@@ -21,9 +21,16 @@ click_events_resume_button:
   action: click_button
 check_event_message_on_dashboard_page:
   element:
-    selector:
+    selector: &event_item
       xpath: //div[contains(@class, 'co-recent-item__title-message-text') and contains(., '<event_message>')]
     timeout: 30
+check_event_message_in_expand:
+  elements:
+  - selector:
+      <<: *event_item
+    op: click
+  - selector:
+      xpath: //div[contains(@class, 'co-recent-item__content-header') and contains(., '<event_item_header>')]
 check_cluster_version_in_details_card:
   params:
     key: version
