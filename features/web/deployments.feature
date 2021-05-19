@@ -7,7 +7,7 @@ Feature: Check deployments function
     Given I have a project
     # create dc
     When I run the :create client command with:
-      | f | https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/deployment/cancel-deployment-gracefully.json |
+      | f | https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/deployment/deployment1.json |
     Then the step should succeed
     And evaluation of `"hooks"` is stored in the :dc_name clipboard
     When I perform the :wait_latest_deployments_to_deployed web console action with:
